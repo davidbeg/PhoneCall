@@ -1,0 +1,31 @@
+{
+  "name": "PhoneCall",
+  "description" : "One click phone calls",
+  "version": "1.0",
+  "browser_action": {
+    "default_popup": "hello.html",
+    "default_icon": "phone.png"
+  },
+  "permissions": [
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": ["context_menu_button.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"]
+    }
+  ],
+  "manifest_version": 2,
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens hello.html"
+    }
+  }
+}
