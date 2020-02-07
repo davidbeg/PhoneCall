@@ -1,4 +1,5 @@
 function userSelectionChanged() {
+    console.log("Calling userSelectionChanged");
     var sel = window.getSelection().toString();
 
     if(sel.length)

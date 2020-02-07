@@ -9,10 +9,9 @@ function genericOnClick(info, tab) {
     console.log("item " + info.menuItemId + " was clicked");
     console.log("info: " + JSON.stringify(info));
     console.log("tab: " + JSON.stringify(tab));
-    console.log("selection: " + window.getSelection().toString());
-    chrome.contextMenus.update(checkbox1, {
-        enabled: enabled_flag
-    });
+    console.log("selection: " + info.selectionText);
+    pass_request(info.selectionText);
+    console.log("pass_request ended");
 }
 
 function is_valid_number(request) {
@@ -31,6 +30,7 @@ console.log("'" + "selection" + "' item:" + call_button_id);
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
 {
+    console.log("Calling onRequest listener");
     switch(request.message)
     {
         case 'selectionChanged':
@@ -42,3 +42,15 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
             break;
     }
 });
+
+// var https = require("https");
+
+function pass_request(number) {
+    const url = `https://ne6ok9eagk.execute-api.us-east-2.amazonaws.com/test/TestHello?x=${number}&y=234&z=345`;
+    var x = new XMLHttpRequest();
+    x.open('GET', url);
+    x.onload = function() {
+        console.log(x.responseText);
+    };
+    x.send();
+}
